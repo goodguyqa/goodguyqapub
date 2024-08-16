@@ -1,0 +1,36 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.junit.Assert;
+
+public class LoginTest {
+    public static void main(String[] args) {
+        // Set the path to the chromedriver executable
+        System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
+
+        // Create a new instance of the Chrome driver
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to the the login page
+        driver.get("https://practicetestautomation.com/practice-test-login");
+
+        // Find the username and password fields and enter valid credentials
+        WebElement usernameField = driver.findElement(By.id("username"));
+        WebElement passwordField = driver.findElement(By.id("password"));
+        usernameField.sendKeys("validUsername");
+        passwordField.sendKeys("validPassword");
+
+        // Find login button and click
+        WebElement loginButton = driver.findElement(By.id("loginButton"));
+        loginButton.click();
+
+        // Verify that the user is redirected to the homepage by checking for a specific element or page title
+        String expectedTitle = "The Login Page";
+        String actualTitle = driver.getTitle();
+        Assert.assertEquals(expectedTitle, actualTitle);
+
+        // Close the browser
+        driver.quit();
+    }
+}
